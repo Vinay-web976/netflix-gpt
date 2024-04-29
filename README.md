@@ -2,6 +2,13 @@
 
 - created app using vite
 - configured tailwind
+- Created login form
+- Used useRef hook
+- Added routing
+- Added validation for sign in/sign up
+- firebase setup
+- deployed app to firebase
+- Added authentication using firebase
 
 # Features
 
