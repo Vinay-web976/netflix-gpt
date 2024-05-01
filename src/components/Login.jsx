@@ -5,7 +5,11 @@ import { auth } from "../utils/firebase";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  updateProfile,
 } from "firebase/auth";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { setUser } from "../utils/userSlice";
 
 const Login = () => {
   const [isSignIn, setIsSignIn] = useState(true);
@@ -14,6 +18,8 @@ const Login = () => {
   const email = useRef(null);
   const password = useRef(null);
   const userName = useRef(null);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleButtonClick = () => {
     const error = isSignIn
@@ -32,7 +38,20 @@ const Login = () => {
           password.current.value
         )
           .then((userCredential) => {
-            console.log(userCredential);
+            const user = userCredential.user;
+            updateProfile(user, {
+              displayName: userName.current.value,
+              photoURL:
+                "https://lh3.googleusercontent.com/a/ACg8ocL3aXFYdOj-R9CCUvbYP3dKcPAAoZHeXsm1PTXD9hlMYycrpGPX=s360-c-no",
+            })
+              .then(() => {
+                const { photoURL, displayName, email, uid } = auth.currentUser;
+                dispatch(setUser({ photoURL, displayName, email, uid }));
+              })
+              .catch((error) => {
+                setErrorMessage(error.code + "-" + error.message);
+              });
+            navigate("/browse");
           })
           .catch((error) => {
             setErrorMessage(error.code + "-" + error.message);
@@ -44,7 +63,7 @@ const Login = () => {
           password.current.value
         )
           .then((userCredential) => {
-            console.log(userCredential);
+            navigate("/browse");
           })
           .catch((error) => {
             setErrorMessage(error.code + "-" + error.message);
