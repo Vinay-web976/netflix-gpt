@@ -68,9 +68,14 @@ const Login = () => {
     }
   };
   return (
-    <div className={`h-screen w-screen bg-[url('${LOGIN_BACKGROUND}')]`}>
+    <div
+      className="h-screen w-screen"
+      style={{
+        backgroundImage: `url(${LOGIN_BACKGROUND})`,
+      }}
+    >
       <Header />
-      <div className="flex align-middle justify-center p-8 flex-col w-[25%] m-auto text-white bg-black/[0.7]">
+      <div className="flex  justify-center p-8 flex-col w-[25%] mx-auto text-white bg-black/[0.7]">
         <h1 className="font-bold text-3xl">
           {isSignIn ? "Sign In" : "Sign Up"}
         </h1>
