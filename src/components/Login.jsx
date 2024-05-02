@@ -68,63 +68,68 @@ const Login = () => {
     }
   };
   return (
-    <div
-      className="h-screen w-screen"
-      style={{
-        backgroundImage: `url(${LOGIN_BACKGROUND})`,
-      }}
-    >
+    <>
       <Header />
-      <div className="flex  justify-center p-8 flex-col w-[25%] mx-auto text-white bg-black/[0.7]">
-        <h1 className="font-bold text-3xl">
-          {isSignIn ? "Sign In" : "Sign Up"}
-        </h1>
-        <form
-          className="flex flex-col mt-5"
-          onSubmit={(e) => e.preventDefault()}
-        >
-          {!isSignIn && (
+
+      <div
+        className="h-screen w-screen pt-44"
+        style={{
+          backgroundImage: `url(${LOGIN_BACKGROUND})`,
+        }}
+      >
+        <div className="flex  justify-center p-8 flex-col w-[25%] mx-auto text-white bg-black/[0.7]">
+          <h1 className="font-bold text-3xl">
+            {isSignIn ? "Sign In" : "Sign Up"}
+          </h1>
+          <form
+            className="flex flex-col mt-5"
+            onSubmit={(e) => e.preventDefault()}
+          >
+            {!isSignIn && (
+              <input
+                type="text"
+                className="p-4 bg-black mb-5 rounded-md"
+                placeholder="Full Name"
+                ref={userName}
+              />
+            )}
             <input
               type="text"
               className="p-4 bg-black mb-5 rounded-md"
-              placeholder="Full Name"
-              ref={userName}
+              placeholder="Email"
+              ref={email}
             />
-          )}
-          <input
-            type="text"
-            className="p-4 bg-black mb-5 rounded-md"
-            placeholder="Email"
-            ref={email}
-          />
-          <input
-            type="password"
-            className="p-4 bg-black mb-5 rounded-md"
-            placeholder="Password"
-            ref={password}
-          />
-          {errorMessage && (
-            <p className="text-[rgb(229,9,20)] font-bold m-2">{errorMessage}</p>
-          )}
-          <button
-            className="font-bold bg-[rgb(229,9,20)] p-3 rounded-md"
-            onClick={handleButtonClick}
-          >
-            {isSignIn ? "Sign In" : "Sign Up"}
-          </button>
-
-          <p className="mt-5">
-            {isSignIn ? "New to Netflix ?" : "Already registered ?"}
-            <span
-              className="font-bold cursor-pointer pl-2"
-              onClick={() => setIsSignIn(!isSignIn)}
+            <input
+              type="password"
+              className="p-4 bg-black mb-5 rounded-md"
+              placeholder="Password"
+              ref={password}
+            />
+            {errorMessage && (
+              <p className="text-[rgb(229,9,20)] font-bold m-2">
+                {errorMessage}
+              </p>
+            )}
+            <button
+              className="font-bold bg-[rgb(229,9,20)] p-3 rounded-md"
+              onClick={handleButtonClick}
             >
-              {isSignIn ? "Sign up now" : "Sign in now"}
-            </span>
-          </p>
-        </form>
+              {isSignIn ? "Sign In" : "Sign Up"}
+            </button>
+
+            <p className="mt-5">
+              {isSignIn ? "New to Netflix ?" : "Already registered ?"}
+              <span
+                className="font-bold cursor-pointer pl-2"
+                onClick={() => setIsSignIn(!isSignIn)}
+              >
+                {isSignIn ? "Sign up now" : "Sign in now"}
+              </span>
+            </p>
+          </form>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
