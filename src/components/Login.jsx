@@ -8,8 +8,9 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+
 import { setUser } from "../utils/userSlice";
+import { LOGIN_BACKGROUND, USER_AVATAR } from "../utils/constants";
 
 const Login = () => {
   const [isSignIn, setIsSignIn] = useState(true);
@@ -19,7 +20,6 @@ const Login = () => {
   const password = useRef(null);
   const userName = useRef(null);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const handleButtonClick = () => {
     const error = isSignIn
@@ -41,8 +41,7 @@ const Login = () => {
             const user = userCredential.user;
             updateProfile(user, {
               displayName: userName.current.value,
-              photoURL:
-                "https://lh3.googleusercontent.com/a/ACg8ocL3aXFYdOj-R9CCUvbYP3dKcPAAoZHeXsm1PTXD9hlMYycrpGPX=s360-c-no",
+              photoURL: USER_AVATAR,
             })
               .then(() => {
                 const { photoURL, displayName, email, uid } = auth.currentUser;
@@ -51,7 +50,6 @@ const Login = () => {
               .catch((error) => {
                 setErrorMessage(error.code + "-" + error.message);
               });
-            navigate("/browse");
           })
           .catch((error) => {
             setErrorMessage(error.code + "-" + error.message);
@@ -62,9 +60,7 @@ const Login = () => {
           email.current.value,
           password.current.value
         )
-          .then((userCredential) => {
-            navigate("/browse");
-          })
+          .then((userCredential) => {})
           .catch((error) => {
             setErrorMessage(error.code + "-" + error.message);
           });
@@ -72,7 +68,7 @@ const Login = () => {
     }
   };
   return (
-    <div className="h-screen w-screen bg-[url('https://assets.nflxext.com/ffe/siteui/vlv3/058eee37-6c24-403a-95bd-7d85d3260ae1/e10ba8a6-b96a-4308-bee4-76fab1ebd6ca/IN-en-20240422-POP_SIGNUP_TWO_WEEKS-perspective_WEB_db9348f2-4d68-4934-b495-6d9d1be5917e_large.jpg')]">
+    <div className={`h-screen w-screen bg-[url('${LOGIN_BACKGROUND}')]`}>
       <Header />
       <div className="flex align-middle justify-center p-8 flex-col w-[25%] m-auto text-white bg-black/[0.7]">
         <h1 className="font-bold text-3xl">
