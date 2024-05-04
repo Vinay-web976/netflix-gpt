@@ -7,10 +7,10 @@ import useGPTResults from "../hooks/useGptResults";
 const GptSearchBar = () => {
   const langKey = useSelector((store) => store.config.lang);
   const searchText = useRef(null);
-  const { handleGPTSearch } = useGPTResults();
+  const { handleGeminiSearch } = useGPTResults();
 
   const handleGPTSearchClick = async () => {
-    handleGPTSearch(searchText.current.value);
+    handleGeminiSearch(searchText.current.value);
   };
 
   return (
